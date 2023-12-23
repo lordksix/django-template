@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=db
   web:
-    container_name: cw_django_dev
+    container_name: CONTAINERNAME
     build: .
     restart: always
     command: python manage.py runserver 0.0.0.0:8000
@@ -30,3 +30,6 @@ services:
       - DJANGO_DEBUG=1
     depends_on:
       - db
+
+networks:
+   NETWORKNAME:
