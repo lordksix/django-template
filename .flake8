@@ -1,0 +1,6 @@
+[flake8]
+per-file-ignores =
+    # line too long
+    quizes/settings.py: E501,
+    survey/tests.py: E501, E1101,
+    survey/views.py: E1101,
