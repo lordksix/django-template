@@ -14,6 +14,20 @@ services:
   redis:
     image: redis:7
 
+  celery:
+    build:
+      context: ../
+    restart: always
+    command: celery -A core worker -l info
+    env_file:
+      - ../.env
+    volumes:
+      - ../:/usr/src/app/
+    depends_on:
+      - db
+      - redis
+      - web
+
   web:
     container_name: CONTAINERNAME
     build:
@@ -34,8 +48,8 @@ services:
       - DJANGO_SECRET_KEY=dj4ng0_sup3r_s3cr3t_k3y
       - DJANGO_DEBUG=1
     depends_on:
-      - db
       - redis
+      - db
 
 networks:
   django-template:
