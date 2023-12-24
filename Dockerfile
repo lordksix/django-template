@@ -9,7 +9,7 @@ COPY requirements.txt /usr/src/app/
 RUN addgroup --system user && adduser --system --group user
 RUN apt-get update -y && \
     apt-get install -y netcat-traditional && \
-    apt-get install -y gcc python3-dev postgresql-dev musl-dev libmagic1 libffi-dev libzmq3-dev git && \
+    apt-get install -y gcc python3-dev musl-dev libmagic1 libffi-dev libzmq3-dev git && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
     pip install --upgrade pip && \
     pip install -r requirements.txt

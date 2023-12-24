@@ -95,25 +95,29 @@
 
 5. To run locally, you need to have docker install. You must run the following command:
 
-Development
+    ```bash
+        docker compose -f docker-compose.yml up -d --build
+    ```
 
-```bash
-    docker compose -f docker-compose.yml up -d --build
-```
+    and go to localhost:8000
 
-and go to localhost:8000
+6. To run django commands, such as the ones listed below, you can do it inside the DJANGO container or first the following command:
 
-- To create a new super user, run the following command inside the container django container:
+    ```bash
+        docker exec -it CONTAINERNAME /bin/sh
+    ```
 
-```bash
-    python manage.py createsuperuser
-```
+    - To create a new super user:
 
-- To run tests, run the following command inside the container django container:
+    ```bash
+        python manage.py createsuperuser
+    ```
 
-```bash
-    python manage.py test
-```
+    - To run tests:
+
+    ```bash
+        python manage.py test
+    ```
 
 - To stop running the app run the following commands
 Development

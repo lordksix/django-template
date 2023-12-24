@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:latest
     volumes:
-      - ../data/db:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -61,6 +61,9 @@ services:
     depends_on:
       - redis
       - db
+
+volumes:
+  postgres_data:
 
 networks:
   django-template:
