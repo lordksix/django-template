@@ -12,13 +12,13 @@
 
     **Do not forget to get the you agree with the version on the requirements, if not you can change it or update afterwards and refreeze.**
 
-2. Create a new Django application running the following command change the NAMEOFPROJECT:
+2. Create a new Django application running the following command change the core:
 
     ```bash
-        django-admin startproject NAMEOFPROJECT .
+        django-admin startproject core .
     ```
 
-    - Update NAMEOFPROJECT in .flake8
+    **Update core in .flake8 and docker-compose.yml**
 
 3. Update settings.py file:
 
