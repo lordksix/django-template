@@ -12,6 +12,7 @@ echo 'Running migrations...'
 python manage.py migrate
 
 echo 'Collecting static files...'
+chmod -R 755 /usr/src/app/staticfiles
 python manage.py collectstatic --no-input
 
 exec "$@"

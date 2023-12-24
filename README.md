@@ -37,7 +37,7 @@
             env = environ.Env()
 
             SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-            DEBUG = True if os.environ.get("DJANGO_DEBUG") else False
+            DEBUG = bool(os.environ.get("DJANGO_DEBUG"))
             ALLOWED_HOSTS = ["*"]
 
             if DEBUG:
@@ -83,6 +83,11 @@
             LOGOUT_REDIRECT_URL = "/"
             CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://redis:6379/0")
             CELERY_RESULT_BACKEND = os.environ.get("REDIS_BACKEND", "redis://redis:6379/0")
+            # Media and Static files
+            MEDIA_URL = "/media/"
+            MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
+            STATIC_URL = "static/"
+            STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
         ```
 
 4. Run the following command:
