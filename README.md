@@ -93,7 +93,22 @@
 
     and update accordingly
 
-5. To run locally, you need to have docker install. You must run the following command:
+5. Create celery.py in settings folder and copy the following:
+
+    ```py
+        import os
+
+        from celery import Celery
+
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", os.environ.get("DJANGO_SETTINGS_MODULE"))  # type: ignore
+        app = Celery("app")
+        app.config_from_object("django.conf:settings", namespace="CELERY")
+        app.autodiscover_tasks()
+    ```
+
+    **Update core to correct name**
+
+6. To run locally, you need to have docker install. You must run the following command:
 
     ```bash
         docker compose -f docker-compose.yml up -d --build
@@ -101,7 +116,7 @@
 
     and go to localhost:8000
 
-6. To run django commands, such as the ones listed below, you can do it inside the DJANGO container or first the following command:
+7. To run django commands, such as the ones listed below, you can do it inside the DJANGO container or first the following command:
 
     ```bash
         docker exec -it CONTAINERNAME /bin/sh
