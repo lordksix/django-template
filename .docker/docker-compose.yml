@@ -21,6 +21,15 @@ services:
     command: celery -A core worker -l info
     env_file:
       - ../.env
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - DJANGO_SECRET_KEY=dj4ng0_sup3r_s3cr3t_k3y
+      - DJANGO_DEBUG=1
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - REDIS_BACKEND=redis://redis:6379/0
     volumes:
       - ../:/usr/src/app/
     depends_on:
@@ -47,6 +56,8 @@ services:
       - POSTGRES_HOST=db
       - DJANGO_SECRET_KEY=dj4ng0_sup3r_s3cr3t_k3y
       - DJANGO_DEBUG=1
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - REDIS_BACKEND=redis://redis:6379/0
     depends_on:
       - redis
       - db
