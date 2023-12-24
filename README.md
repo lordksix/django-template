@@ -113,6 +113,18 @@
 
     **Update core to correct name**
 
+    - Copy the following inside the __init__.py inside the settings code folder
+
+        ```py
+            from __future__ import absolute_import, unicode_literals
+
+            # This will make sure the app is always imported when
+            # Django starts so that shared_task will use this app.
+            from .celery import app as celery_app
+
+            __all__ = ("celery_app",)
+        ```
+
 6. To run locally, you need to have docker install. You must run the following command:
 
     ```bash
@@ -140,15 +152,13 @@
     ```
 
 - To stop running the app run the following commands
-Development
 
-```bash
-    docker compose -f docker-compose.yml stop
-```
+    ```bash
+        docker compose -f docker-compose.yml stop
+    ```
 
 - To delete containers run the following commands
-Development
 
-```bash
-    docker compose -f docker-compose.yml down
-```
+    ```bash
+        docker compose -f docker-compose.yml down
+    ```
