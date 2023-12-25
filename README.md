@@ -38,12 +38,7 @@
 
             SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
             DEBUG = bool(os.environ.get("DJANGO_DEBUG"))
-            ALLOWED_HOSTS = ["*"]
-
-            if DEBUG:
-                ALLOWED_HOSTS = ["*"]
-            else:
-                ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["example.com"])  # type: ignore
+            ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
         ```
 
     - Update DATABASES:
@@ -60,7 +55,7 @@
                 }
             }
             DATABASES["default"]["ATOMIC_REQUESTS"] = True
-            DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # type: ignore
+            DATABASES["default"]["CONN_MAX_AGE"] = int(os.environ.get("CONN_MAX_AGE", "60"))
         ```
 
     - Add LOGGING, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL:
@@ -113,7 +108,7 @@
 
     **Update core to correct name**
 
-    - Copy the following inside the __init__.py inside the settings code folder
+    - Copy the following inside the **init**.py inside the settings code folder
 
         ```py
             from __future__ import absolute_import, unicode_literals
