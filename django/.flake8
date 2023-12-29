@@ -1,0 +1,6 @@
+[flake8]
+per-file-ignores =
+    # line too long
+    core/settings.py: E501,
+    core/celery.py: E501,
+    */migrations/*.py: E501,
