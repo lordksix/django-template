@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   db:
-    container_name: postgres_db
+    container_name: django-template-database
     image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -11,20 +11,22 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST=db
+      - POSTGRES_HOST=5432
 
   redis:
-    container_name: django_redis
+    container_name: django-template-redis
     image: redis:7
 
   rabbitmq:
     image: rabbitmq:management
     restart: always
-    container_name: django_rabbitmq
+    container_name: django-template-rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
 
   flower:
+    container_name: django-template-flowerui
     image: mher/flower
     restart: always
     ports:
@@ -36,58 +38,5 @@ services:
       - celery
       - rabbitmq
 
-  celery:
-    build:
-      context: ../
-    restart: always
-    command: celery -A core worker -l info
-    env_file:
-      - ../.env
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
-      - DJANGO_SECRET_KEY=dj4ng0_sup3r_s3cr3t_k3y
-      - DJANGO_DEBUG=1
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
-      - REDIS_BACKEND=redis://redis:6379/0
-    volumes:
-      - ../:/usr/src/app/
-    depends_on:
-      - db
-      - redis
-      - web
-      - rabbitmq
-
-  web:
-    container_name: CONTAINERNAME
-    build:
-      context: ../
-    restart: always
-    command: python manage.py runserver 0.0.0.0:8000
-    env_file:
-      - ../.env
-    volumes:
-      - ../:/usr/src/app/
-    ports:
-      - "8000:8000"
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_HOST=db
-      - DJANGO_SECRET_KEY=dj4ng0_sup3r_s3cr3t_k3y
-      - DJANGO_DEBUG=1
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
-      - REDIS_BACKEND=redis://redis:6379/0
-    depends_on:
-      - redis
-      - db
-      - rabbitmq
-
 volumes:
   postgres_data:
-
-networks:
-  django-template:
