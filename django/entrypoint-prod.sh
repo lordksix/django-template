@@ -20,8 +20,10 @@ python manage.py migrate
 echo 'Collecting static files...'
 chmod -R 755 /usr/src/app/staticfiles
 python manage.py collectstatic --no-input
+chmod -R 755 /usr/src/app/staticfiles
 
 echo 'Starting server...'
 uvicorn core.asgi:application --host 0.0.0.0 --port 8080 --workers 4 --log-level debug --reload
+echo 'Server initiated... '
 
 exec "$@"

@@ -18,19 +18,17 @@ RUN apk update && \
     pip install --upgrade pip && \
     pip install -r requirements.txt --no-cache-dir
 COPY .env "$APP_HOME"
+COPY ./django/ "$APP_HOME"
 
 FROM base AS development
-COPY ./django/entrypoint-dev.sh "$APP_HOME"
+
 RUN sed -i 's/\r$//g' "$APP_HOME"/entrypoint-dev.sh
 RUN chmod +x "$APP_HOME"/entrypoint-dev.sh
-COPY ./django/ "$APP_HOME"
 USER user
 ENTRYPOINT ["/usr/src/app/entrypoint-dev.sh"]
 
 FROM base AS production
-COPY ./django/entrypoint-prod.sh "$APP_HOME"
 RUN sed -i 's/\r$//g' "$APP_HOME"/entrypoint-prod.sh
 RUN chmod +x "$APP_HOME"/entrypoint-prod.sh
-COPY ./django "$APP_HOME"
 USER user
 ENTRYPOINT ["/usr/src/app/entrypoint-prod.sh"]
