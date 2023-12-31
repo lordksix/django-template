@@ -2,6 +2,8 @@ import dj_database_url
 
 from .base import *
 
+STATICFILES_DIR = (os.path.join(BASE_DIR, "staticfiles"),)
+
 # Email
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "'smtp.gmail.com'"
@@ -25,4 +27,8 @@ db_from_env = dj_database_url.config(
 )
 DATABASES["default"].update(db_from_env)
 
-CSRF_TRUSTED_ORIGINS = ["https://lit-hollows-12137-4ef97bdabd36.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://lit-hollows-12137-4ef97bdabd36.herokuapp.com",
+    "http://localhost/",
+    "http://127.0.0.1/",
+]
