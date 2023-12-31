@@ -18,3 +18,4 @@ djangorestframework
 coverage
 channels
 channels-redis
+redis

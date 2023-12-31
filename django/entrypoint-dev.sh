@@ -21,4 +21,7 @@ echo 'Collecting static files...'
 chmod -R 755 /usr/src/app/staticfiles
 python manage.py collectstatic --no-input
 
+echo 'Super user creation...'
+python manage.py superuser || true
+
 exec "$@"
