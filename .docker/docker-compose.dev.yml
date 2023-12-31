@@ -13,6 +13,7 @@ services:
       - ../.env
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings.development
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -46,6 +47,7 @@ services:
       - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings.development
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
