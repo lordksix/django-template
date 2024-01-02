@@ -1,2 +1,3 @@
 load-plugins=pylint_django
 disable=E1101
+generated-members=objects

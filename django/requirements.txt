@@ -19,3 +19,10 @@ coverage
 channels
 channels-redis
 redis
+pylint_django
+flake8
+mypy
+django-stubs[compatible-mypy]
+djangorestframework-stubs[compatible-mypy]
+djangorestframework-simplejwt
+django-filter
